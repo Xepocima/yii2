@@ -1,0 +1,34 @@
+<?php
+use app\models\Game;
+/* @var $this yii\web\View */
+ 
+$this->title = 'KaKTyC';
+?>
+<div class="site-index">
+
+    <div class="body-content">
+
+        <div class="row">
+
+<? 
+
+     /* $games = Game::find('game_name')->All();
+      foreach ($games as $game)
+      {
+        echo  '<li>',$game->game_name, '</li>';
+      }*/
+
+    for($i = 0; $i<2; $i++){
+      $posters = Game::find()->All();
+      foreach ($posters as $poster)
+      {
+        echo  '<div class="col-xs-6 col-md-3"><a href="',Yii::$app->urlManager->createUrl(['game/view/', 'id' => $poster->game_id]),'" class="thumbnail"> <img src="',$poster->game_poster, '"width="225" height="320" alt="..." title="'; echo $poster->game_name; echo '"></a></div>';
+
+      }
+    }
+      ?>
+            
+        </div>
+
+    </div>
+</div>
