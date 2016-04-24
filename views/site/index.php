@@ -18,14 +18,17 @@ $this->title = 'KaKTyC';
         echo  '<li>',$game->game_name, '</li>';
       }*/
 
-    for($i = 0; $i<1; $i++){
+      $i = 1;
       $posters = Game::find()->All();
       foreach ($posters as $poster)
       {
-        echo  '<div class="col-xs-6 col-md-4 col-sm-4 col-lg-3 clearfix"><a href="',Yii::$app->urlManager->createUrl(['site/about_game/', 'id' => $poster->game_id]),'" class="thumbnail"> <img src="',$poster->game_poster, '"width="225" height="320" alt="..." title="'; echo $poster->game_name; echo '"></a></div>';
-
+        echo  '<div class="col-xs-6 col-md-4 col-sm-4 col-lg-3 clearfix"><a href="',
+        Yii::$app->urlManager->createUrl(['site/about_game/', 'id' => $poster->game_id]),
+        '" class="thumbnail"> <img src="',$poster->game_poster,
+         '"width="225" height="320" alt="..." title="'; echo $poster->game_name; echo '"></a></div>';
+        $i++;
       }
-    }
+    
       ?>
             
         </div>

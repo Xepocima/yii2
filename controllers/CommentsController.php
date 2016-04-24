@@ -3,18 +3,16 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Game;
-use app\models\Trailers;
-use app\models\Screenshots;
-use app\models\GameSearch;
+use app\models\Comments;
+use app\models\CommentsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * GameController implements the CRUD actions for Game model.
+ * CommentsController implements the CRUD actions for Comments model.
  */
-class GameController extends Controller
+class CommentsController extends Controller
 {
     /**
      * @inheritdoc
@@ -32,12 +30,12 @@ class GameController extends Controller
     }
 
     /**
-     * Lists all Game models.
+     * Lists all Comments models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new GameSearch();
+        $searchModel = new CommentsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -47,7 +45,7 @@ class GameController extends Controller
     }
 
     /**
-     * Displays a single Game model.
+     * Displays a single Comments model.
      * @param integer $id
      * @return mixed
      */
@@ -59,44 +57,25 @@ class GameController extends Controller
     }
 
     /**
-     * Creates a new Game model.
+     * Creates a new Comments model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Game();
-        $trailer = new Trailers(); // Добавить трейлер
-        $screenshot = new Screenshots(); // Добавить трейлер
+        $model = new Comments();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-              //$trailer->trailer_id = 2;
-            //print_r(Yii::$app->request->post('Screenshots'));
-           $info1 = Yii::$app->request->post('Screenshots');
-           $info2 = Yii::$app->request->post('Trailers');
-        
-           $trailer->trailer_path = $info2['trailer_path'];
-           $trailer->game_id = $model->game_id;
-           $trailer->save();
-
-           $screenshot->screensh_path = $info1['screensh_path'];
-           $screenshot->game_id = $model->game_id;
-           $screenshot->save();
-            //print_r($x);
-            //die();*/
-            
-            
-            return $this->redirect(['view', 'id' => $model->game_id]);
-            
+            return $this->redirect(['view', 'id' => $model->comm_id]);
         } else {
             return $this->render('create', [
-                'model' => $model, 'trailer' => $trailer,'screenshot' => $screenshot, 
+                'model' => $model,
             ]);
         }
     }
 
     /**
-     * Updates an existing Game model.
+     * Updates an existing Comments model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -106,7 +85,7 @@ class GameController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->game_id]);
+            return $this->redirect(['view', 'id' => $model->comm_id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -115,7 +94,7 @@ class GameController extends Controller
     }
 
     /**
-     * Deletes an existing Game model.
+     * Deletes an existing Comments model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -128,15 +107,15 @@ class GameController extends Controller
     }
 
     /**
-     * Finds the Game model based on its primary key value.
+     * Finds the Comments model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Game the loaded model
+     * @return Comments the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Game::findOne($id)) !== null) {
+        if (($model = Comments::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
