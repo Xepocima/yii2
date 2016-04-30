@@ -3,7 +3,7 @@
 /* @var $this yii\web\View */
 
 use yii\helpers\Html;
-use app\models\Game;
+use app\models\Genre;
 
 $this->title = 'Games';
 $this->params['breadcrumbs'][] = $this->title;
@@ -11,10 +11,10 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="site-game">
 
     
-      <? $games = Game::find('game_name')->All();
-      foreach ($games as $game)
+      <? $genres = Genre::find()->All();
+      foreach ($genres as $genr)
       {
-      	echo  '<li>',$game->game_name, '</li>';
+      	echo  '<li>',$genr->genre_name,' - ',$genr->genre_desc,'</li>';
   	  }?> 
 
  </div>

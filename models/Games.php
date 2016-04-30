@@ -45,7 +45,7 @@ class Games extends \yii\db\ActiveRecord
         return [
             'games_id' => 'Games ID',
             'game_id' => 'Game ID',
-            'genre_id' => 'Genre ID',
+            'genre_id' => 'Жанры',
         ];
     }
 

@@ -28,7 +28,7 @@ class Screenshots extends \yii\db\ActiveRecord
     {
         return [
             [['screensh_path', 'game_id'], 'required'],
-            [['screensh_path'], 'string'],
+            [['screensh_path'], 'url'],
             [['game_id'], 'integer'],
         ];
     }
@@ -40,7 +40,7 @@ class Screenshots extends \yii\db\ActiveRecord
     {
         return [
             'screensh_id' => 'Screensh ID',
-            'screensh_path' => 'Screensh Path',
+            'screensh_path' => 'Скриншоты',
             'game_id' => 'Game ID',
         ];
     }

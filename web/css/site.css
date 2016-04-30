@@ -101,3 +101,6 @@ a.thumbnail{
     background-color: rgba(128,128,128,0.27450980392156865);
     border-color: gray;
 }
+.embed-responsive-item{
+    padding: 5px;
+}

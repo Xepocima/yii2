@@ -57,8 +57,15 @@ $this->params['breadcrumbs'][] = $this->title;
   <h3 class="text-left">Разработчик</h3>
   <p class="text-left"><? echo $games[0]->game_dev?> </p>
   <h3 class="text-left">Цена</h3>
-  <p class="text-left"><? echo $games[0]->game_price?> руб.</p>
-</div>
+  <p class="text-left"><? 
+    if($games[0]->game_price != 0){
+      echo '$'.$games[0]->game_price;
+    }else{
+      echo 'Free';
+    }
+
+    ?></p>
+  </div>
 </div>
 <div class="row">
  <div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
@@ -88,7 +95,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <h3 class="text-center">Трейлеры</h3>';
     foreach($trailers as $key){
 
-     echo $key->trailer_path;
+     echo '<iframe class="embed-responsive-item" width="580" height="410" src="'.
+     $key->trailer_path.
+     '" frameborder="0" allowfullscreen ></iframe>';
    }
    echo '
  </div>

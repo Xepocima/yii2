@@ -30,7 +30,7 @@ class Trailers extends \yii\db\ActiveRecord
     {
         return [
             [['trailer_path', 'game_id'], 'required'],
-            [['trailer_path'], 'string'],
+            [['trailer_path'], 'url'],
             [['game_id'], 'integer'],
             [['game_id'], 'exist', 'skipOnError' => true, 'targetClass' => Game::className(), 'targetAttribute' => ['game_id' => 'game_id']],
         ];
@@ -43,7 +43,7 @@ class Trailers extends \yii\db\ActiveRecord
     {
         return [
             'trailer_id' => 'Trailer ID',
-            'trailer_path' => 'Trailer Path',
+            'trailer_path' => 'Трейлер',
             'game_id' => 'Game ID',
         ];
     }

@@ -36,11 +36,11 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => 'Жанри', 'url' => ['/site/index']],
-            ['label' => 'Новини', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
-            ['label' => 'Games', 'url' => ['/site/game']],
-            ['label' => 'Додати гру', 'url' => ['/game/create']],
+            ['label' => 'Игры', 'url' => ['/site/index']],
+            ['label' => 'Новости', 'url' => ['/site/about']],
+            ['label' => 'Контакты', 'url' => ['/site/contact']],
+            ['label' => 'Жанры', 'url' => ['/site/game']],
+            ['label' => 'Добавить игру', 'url' => ['/game/create']],
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]
             ) : (

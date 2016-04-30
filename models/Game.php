@@ -37,10 +37,10 @@ class Game extends \yii\db\ActiveRecord
     {
         return [
             [['game_name', 'game_desc', 'game_dev', 'game_announce', 'game_price', 'game_poster'], 'required'],
-            [['game_desc', 'game_poster'], 'string'],
-            [['game_announce'], 'safe'],
+            [['game_poster'], 'url'],
+            [['game_announce'], 'date', 'format' => 'yyyy-mm-dd'],
             [['game_price'], 'integer'],
-            [['game_name', 'game_dev'], 'string', 'max' => 30],
+            [['game_name', 'game_dev','game_desc'], 'string', 'max' => 1100],
         ];
     }
 
@@ -54,7 +54,7 @@ class Game extends \yii\db\ActiveRecord
             'game_name' => 'Game Name',
             'game_desc' => 'Game Desc',
             'game_dev' => 'Game Dev',
-            'game_announce' => 'Game Announce',
+            'game_announce' => 'Дата выхода',
             'game_price' => 'Game Price',
             'game_poster' => 'Game Poster',
         ];

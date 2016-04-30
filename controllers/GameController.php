@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Game;
+use app\models\Games;
 use app\models\Trailers;
 use app\models\Screenshots;
 use app\models\GameSearch;
@@ -22,12 +23,12 @@ class GameController extends Controller
     public function behaviors()
     {
         return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
+        'verbs' => [
+        'class' => VerbFilter::className(),
+        'actions' => [
+        'delete' => ['POST'],
+        ],
+        ],
         ];
     }
 
@@ -43,7 +44,7 @@ class GameController extends Controller
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-        ]);
+            ]);
     }
 
     /**
@@ -55,7 +56,7 @@ class GameController extends Controller
     {
         return $this->render('view', [
             'model' => $this->findModel($id),
-        ]);
+            ]);
     }
 
     /**
@@ -66,34 +67,60 @@ class GameController extends Controller
     public function actionCreate()
     {
         $model = new Game();
-        $trailer = new Trailers(); // Добавить трейлер
-        $screenshot = new Screenshots(); // Добавить трейлер
+        $trailers = [new Trailers()]; // Добавить трейлер
+        $screenshot = [new Screenshots()]; // Добавить скриншот
+        $genres = [new Games()]; // Добавить жанры
 
+        $arr_gnr = [];
+        $arr_scr = [];
+        $arr_trl = [];
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-              //$trailer->trailer_id = 2;
-            //print_r(Yii::$app->request->post('Screenshots'));
-           $info1 = Yii::$app->request->post('Screenshots');
-           $info2 = Yii::$app->request->post('Trailers');
-        
-           $trailer->trailer_path = $info2['trailer_path'];
-           $trailer->game_id = $model->game_id;
-           $trailer->save();
+            $data = Yii::$app->request->post('Screenshots');
+            $genrs = Yii::$app->request->post('Games');
+            $trlrs = Yii::$app->request->post('Trailers');
 
-           $screenshot->screensh_path = $info1['screensh_path'];
-           $screenshot->game_id = $model->game_id;
-           $screenshot->save();
-            //print_r($x);
-            //die();*/
-            
-            
-            return $this->redirect(['view', 'id' => $model->game_id]);
-            
-        } else {
-            return $this->render('create', [
-                'model' => $model, 'trailer' => $trailer,'screenshot' => $screenshot, 
+            foreach ($data[screensh_path] as $key) {
+                      $arr_scr[]=$key;
+            }
+            foreach ($genrs[genre_id] as $key) {
+                      $arr_gnr[]=$key;
+            }
+             foreach ($trlrs[trailer_path] as $key) {
+                      $arr_trl[]=$key;
+            }
+           /* print_r($trlrs);
+            die();*/
+
+          foreach (array_keys($data[screensh_path]) as $index) {
+                $screenshot[$index] = new Screenshots();
+                $screenshot[$index]->screensh_path = $arr_scr[$index];
+                $screenshot[$index]->game_id = $model->game_id;
+                $screenshot[$index]->save();
+
+            }
+            foreach (array_keys($genrs[genre_id]) as $index) {
+                $genres[$index] = new Games();
+                $genres[$index]->genre_id = $arr_gnr[$index];
+                $genres[$index]->game_id = $model->game_id;
+                $genres[$index]->save();
+
+            }
+            foreach (array_keys($trlrs[trailer_path]) as $index) {
+                $trailers[$index] = new Trailers();
+                $trailers[$index]->trailer_path = $arr_trl[$index];
+                $trailers[$index]->game_id = $model->game_id;
+                $trailers[$index]->save();
+
+            }
+
+        return $this->redirect(['view', 'id' => $model->game_id]);
+
+    } else {
+        return $this->render('create', [
+            'model' => $model, 'trailers' => $trailers,'screenshot' => $screenshot, 'genres' => $genres,
             ]);
-        }
     }
+}
 
     /**
      * Updates an existing Game model.
@@ -110,7 +137,7 @@ class GameController extends Controller
         } else {
             return $this->render('update', [
                 'model' => $model,
-            ]);
+                ]);
         }
     }
 
