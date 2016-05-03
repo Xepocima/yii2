@@ -28,7 +28,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'game_id',
             'game_name',
             'game_desc:ntext',
             'game_dev',
@@ -37,5 +36,31 @@ $this->params['breadcrumbs'][] = $this->title;
             'game_poster:image',
         ],
     ]) ?>
+    <?php foreach ($trailers as $key) { ?>
+    <?= DetailView::widget([
+        'model' => $key,
+        'attributes' => [
+            'trailer_path:ntext',     
+        ],
+    ]) ?>
+    <?php } ?>
+    <?php foreach ($screenshots as $key) { ?>
+  
+    <?= DetailView::widget([
+        'model' => $key,
+        'attributes' => [
+            'screensh_path:image',     
+        ],
+    ]) ?>
+    <?php } ?>
+    <?php foreach ($genres as $key) { ?>
+    <?= DetailView::widget([
+        'model' => $key,
+        'attributes' => [
+            'genre_name:ntext',     
+        ],
+    ]) ?>
+    <?php } ?>
+
 
 </div>

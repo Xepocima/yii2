@@ -104,3 +104,10 @@ a.thumbnail{
 .embed-responsive-item{
     padding: 5px;
 }
+.pagination{
+
+  position: relative;
+
+  bottom: 10px;
+  left: 45%;
+}

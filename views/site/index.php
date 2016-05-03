@@ -1,6 +1,7 @@
 <?php
 use app\models\Game;
 use app\models\Trailers;
+use yii\widgets\LinkPager;
 /* @var $this yii\web\View */
  
 $this->title = 'KaKTyC';
@@ -30,9 +31,13 @@ $this->title = 'KaKTyC';
 		die();*/
       
 
+// отображаем ссылки на страницы
+
+
       $i = 1;
-      $posters = Game::find()->All();
-      foreach ($posters as $poster)
+      //$posters = Game::find()->All();
+      echo  '<div class="container">';
+      foreach ($models as $poster)
       {
         echo  '<div class="col-xs-6 col-md-4 col-sm-4 col-lg-3 clearfix"><a href="',
         Yii::$app->urlManager->createUrl(['site/about_game/', 'id' => $poster->game_name]),
@@ -40,6 +45,11 @@ $this->title = 'KaKTyC';
          '"width="225" height="320" alt="..." title="'; echo $poster->game_name; echo '"></a></div>';
         $i++;
       }
+      echo  '</div>';
+      echo LinkPager::widget([
+    'pagination' => $pages,
+    'maxButtonCount' => 3,
+    ]);
     
       ?>
             

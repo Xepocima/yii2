@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Game */
 
-$this->title = 'Create Game';
-$this->params['breadcrumbs'][] = ['label' => 'Games', 'url' => ['index']];
+$this->title = 'Добавить';
+$this->params['breadcrumbs'][] = ['label' => 'Игры', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="game-create">
@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?= $this->render('_form2', [
-        'model' => $model, 'trailers'=>$trailers ,'screenshot'=>$screenshot, 'genres'=>$genres,
+        'model' => $model, 'trailers'=>$trailers ,'screenshot'=>$screenshot, 'genre'=>$genre,
     ]) ?>
 
 </div>

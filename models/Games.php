@@ -30,7 +30,7 @@ class Games extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['game_id', 'genre_id'], 'required'],
+            [['game_id'], 'required'],
             [['game_id', 'genre_id'], 'integer'],
             [['game_id'], 'exist', 'skipOnError' => true, 'targetClass' => Game::className(), 'targetAttribute' => ['game_id' => 'game_id']],
             [['genre_id'], 'exist', 'skipOnError' => true, 'targetClass' => Genre::className(), 'targetAttribute' => ['genre_id' => 'genre_id']],

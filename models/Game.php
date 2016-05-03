@@ -40,7 +40,7 @@ class Game extends \yii\db\ActiveRecord
             [['game_poster'], 'url'],
             [['game_announce'], 'date', 'format' => 'yyyy-mm-dd'],
             [['game_price'], 'integer'],
-            [['game_name', 'game_dev','game_desc'], 'string', 'max' => 1100],
+            [['game_name', 'game_dev','game_desc'], 'string', 'max' => 2100],
         ];
     }
 
